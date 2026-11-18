@@ -1,0 +1,156 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="description" content="P2H 복합설비 계측과 운전 시나리오 비교 시제품">
+<title>P2H 유연화 시스템 | P2H Flex Lab</title>
+<link rel="icon" type="image/png" sizes="64x64" href="assets/p2h-equipment-favicon.png">
+<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="theme.css">
+<script defer src="model.js"></script>
+<script defer src="measure.js"></script>
+<script defer src="app.js"></script>
+<script defer src="measurement-charts.js"></script>
+<script defer src="workbench.js"></script>
+<script defer src="visuals.js"></script>
+<script defer src="gallery.js"></script>
+</head>
+<body>
+<header class="top">
+ <div class="wrap top-in">
+  <div class="brand">
+   <img class="brand-icon" src="assets/p2h-equipment-icon.png" width="224" height="224" alt="">
+   <div class="brand-copy">
+    <div class="brand-names"><strong class="brand-ko">P2H 유연화 시스템</strong><span class="brand-en" lang="en">P2H FLEX LAB</span></div>
+    <small class="brand-subtitle">복합설비 계측 · 효율 검증 · 수요유연화</small>
+   </div>
+  </div>
+  <span class="private">연구용 시제품</span>
+ </div>
+</header>
+<div class="nav"><nav class="wrap" aria-label="주 메뉴"><a href="#monitor" data-page="monitor">현장측정(사이트)</a><a href="#mv" data-page="mv">효율측정(M&amp;V)</a><a href="#flex" data-page="flex">수요유연화(DR/VPP)</a><a href="#data" data-page="data">측정데이터 처리</a></nav></div>
+<main class="wrap">
+<section id="monitor" class="page">
+ <div class="hero"><div><p class="eyebrow">SITE MONITORING</p><h1>현장측정(사이트)</h1><p>설비 구성과 현장 계측점을 확인하고 모의운전 시나리오를 비교합니다.</p></div><a class="action emphasis" href="#data">측정데이터 현황 →</a></div>
+ <div class="notice"><b>예시 데이터</b> 모의운전 결과이며 실증 실적·실시간 계측값이 아닙니다.</div>
+ <div class="controls"><div><b>운전 시나리오</b><small>같은 PV 발전·외기온도·열수요 조건</small></div><div class="switch" aria-label="운전 시나리오 선택"><button data-mode="base">기준운전</button><button data-mode="solar">주간 축열 · PV 활용</button><button data-mode="dr">피크시간 DR</button></div></div>
+ <div class="kpis" id="kpis" aria-label="하루 운전 지표"></div>
+ <div class="layout">
+  <section class="card topology">
+   <div class="card-head"><div><p class="eyebrow">SYSTEM TOPOLOGY</p><h2>복합설비 계측 구성도</h2></div><div class="gallery-controls"><button class="action gallery-arrow" id="diagram-prev" aria-label="이전 도면">‹</button><span class="pill" id="diagram-position" aria-live="polite">1 / 3</span><button class="action gallery-arrow" id="diagram-next" aria-label="다음 도면">›</button></div></div>
+   <div id="diagram-interactive"><div class="diagram"><svg viewBox="0 0 844 318" aria-label="전력계통, PV, ESS, 히트펌프 및 축열조 연결 구성도">
+    <defs>
+    <marker id="arrP" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#2563eb"/></marker>
+    <marker id="arrT" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0L10 5L0 10z" fill="#ca5722"/></marker>
+    </defs>
+    <rect x="8" y="8" width="828" height="302" rx="15" fill="#f7faff" stroke="#e2ebf6"/>
+    <g class="signal"><path d="M413 62V83H296V105M519 62V83H520V205"/></g>
+    <rect x="369" y="22" width="197" height="40" rx="8" class="node ems"/><text x="468" y="47" class="nlabel" text-anchor="middle">P2X EMS · 제어신호</text>
+    <g class="power"><path d="M156 134H229" marker-end="url(#arrP)"/><path d="M296 164V211" marker-start="url(#arrP)" marker-end="url(#arrP)"/><path d="M361 134H457" marker-start="url(#arrP)" marker-end="url(#arrP)"/><path d="M593 134H684" marker-start="url(#arrP)" marker-end="url(#arrP)"/><path d="M525 164V211" marker-end="url(#arrP)"/><path d="M525 190H416V211" marker-end="url(#arrP)"/></g>
+    <g class="thermal"><path d="M593 242H632" marker-end="url(#arrT)"/><path d="M723 242H758" marker-end="url(#arrT)"/><path d="M605 242V189H740V242" opacity=".65" stroke-dasharray="4 3" marker-end="url(#arrT)"/><text x="675" y="181" text-anchor="middle" fill="#9e431e" font-size="11">직접공급</text></g>
+    <g class="nlabel" text-anchor="middle">
+    <rect class="node" x="36" y="104" width="120" height="60" rx="9"/><text x="96" y="132">태양광 PV</text><text class="sub" x="96" y="150">발전</text>
+    <rect class="node" x="229" y="104" width="132" height="60" rx="9"/><text x="295" y="132">하이브리드</text><text class="sub" x="295" y="150">인버터</text>
+    <rect class="node" x="457" y="104" width="136" height="60" rx="9"/><text x="525" y="140">현장 전력모선</text>
+    <rect class="node" x="684" y="104" width="126" height="60" rx="9"/><text x="747" y="132">전력계통</text><text class="sub" x="747" y="150">수전 · 역송</text>
+    <rect class="node" x="229" y="212" width="132" height="60" rx="9"/><text x="295" y="240">ESS</text><text class="sub" x="295" y="258">전기 저장</text>
+    <rect class="node" x="374" y="212" width="84" height="60" rx="9"/><text x="416" y="246">기타부하</text>
+    <rect class="node hot" x="457" y="212" width="136" height="60" rx="9"/><text x="525" y="240">히트펌프 HP</text><text class="sub" x="525" y="258">전력 → 열</text>
+    <rect class="node hot" x="632" y="212" width="91" height="60" rx="9"/><text x="678" y="240">축열조</text><text class="sub" x="678" y="258">TES</text>
+    <rect class="node hot" x="758" y="212" width="64" height="60" rx="9"/><text x="790" y="240">열부하</text><text class="sub" x="790" y="258">FCU 등</text>
+    </g>
+    <g id="meters"></g>
+   </svg></div>
+   <div class="legend"><span class="blue">전력 경로</span><span class="orange">열공급 경로</span><span class="dash">제어·통신</span><small>M01–M06은 시제품용 가상 계측점입니다.</small></div></div>
+   <div id="diagram-photo" hidden><button type="button" class="diagram-upload" id="replace-diagram"><img id="diagram-image" alt=""><span>이미지를 눌러 도면 교체</span></button></div>
+   <input id="diagram-file" type="file" accept="image/png,image/jpeg,image/webp" hidden>
+   <div class="gallery-footer"><span id="diagram-caption">대화형 논리 구성도</span><button id="diagram-full" class="action" hidden>크게 보기</button><button id="diagram-reset" class="action" hidden>기본 도면 복원</button></div>
+   <p class="subtext" id="diagram-status" role="status">공개용 예시 도면은 ‹ ›로 확인할 수 있습니다.</p>
+   <dialog id="diagram-dialog" aria-label="도면 확대 보기"><form method="dialog"><button class="action">닫기</button></form><img id="diagram-large" alt=""></dialog>
+  </section>
+  <aside class="card detail"><p class="eyebrow">METER DETAIL</p><h2 id="meter-title"></h2><div class="meter-shortcuts" id="meter-shortcuts" aria-label="계측점 선택"></div><div id="meter-data" aria-live="polite"></div><div class="hour"><label for="hour">선택 시간 <output id="hour-label"></output></label><input type="range" id="hour" min="0" max="23" step="1" value="12"></div></aside>
+ </div>
+ <div class="charts">
+  <section class="card"><div class="card-head"><div><p class="eyebrow">24H ELECTRIC PROFILE</p><h2>시간대별 전력 프로파일</h2></div><span class="pill">kW</span></div><div id="electric" class="chart"></div><div class="legend"><span class="blue">선택 운전 수전</span><span class="dash">기준운전 수전</span><span class="green">PV 발전</span><span class="orange">HP 소비전력</span></div></section>
+  <section class="card"><div class="card-head"><div><p class="eyebrow">24H THERMAL PROFILE</p><h2>열공급 및 축열 상태</h2></div><span class="pill">kWₜₕ / kWhₜₕ</span></div><div id="thermal" class="chart"></div><div class="legend"><span class="orange">HP 열출력 (좌)</span><span class="green">열수요 (좌)</span><span class="blue">TES 저장열량 (우)</span></div></section>
+ </div>
+ <details class="card notes"><summary>시나리오 가정 및 지표 산정기준</summary><p id="scenario-note"></p><p>1시간 평균전력 기준. 비교군 모두 같은 PV 발전과 최종 열공급을 가정하며, TES·ESS의 하루 시작·종료 저장량은 모두 0입니다. COP는 외기온도만 반영하는 예시 모델이며 TES 충전효율 90%, ESS 충·방전 효율은 각각 95%를 가정했습니다.</p><p>PV 자가소비는 PV 직접소비와 PV로 충전한 ESS의 부하 공급량으로 계산하며 저장손실은 제외합니다. 요금은 예시 시간대별 전력량요금만 비교합니다. 피크는 일 최대 계통수전전력이며 실제 요금청구 수요전력이나 DR 정산값이 아닙니다.</p></details>
+</section>
+<section id="data" class="page" hidden>
+ <div class="hero"><div><p class="eyebrow">DATA PROCESSING</p><h1>측정데이터 처리</h1><p>자료 확보 현황과 데이터 품질을 확인하고, 측정기간 추이와 일별 계측값을 비교합니다.</p></div><span class="pill">브라우저 내 처리</span></div>
+ <section class="card workbench" id="measurement">
+  <div class="card-head"><div><p class="eyebrow">MEASUREMENT INVENTORY</p><h2>측정데이터 현황</h2></div></div>
+  <p class="subtext">CSV를 불러와 시간·계측값을 검토합니다. 파일은 서버로 전송하거나 저장하지 않습니다.</p>
+  <div class="work-controls"><label class="filepick">측정 CSV <input id="measure-file" type="file" accept=".csv,text/csv"></label><button class="action" id="load-sample">예시 데이터 보기</button><button class="action" id="save-sample">예제 CSV 다운로드</button><button class="action" id="clear-measure" hidden>자료 지우기</button></div>
+  <details class="format"><summary>지원 CSV 형식과 시간 기준</summary><p>UTF-8, 쉼표 구분, 최대 2 MB·50,000행. 첫 줄에 <code>timestamp</code>와 지원 계측 열을 하나 이상 입력합니다. 예: <code>2026-01-15T12:00:00+09:00</code>. 시간대가 없는 값은 KST로 처리하며, 명시된 시간대는 KST로 변환하여 표시합니다.</p><p id="csv-fields"></p></details>
+  <div class="notice work-status" id="measure-status" role="status">불러온 자료가 없습니다. 예시 데이터로 분석 화면을 먼저 확인할 수 있습니다.</div>
+  <div id="measure-result" hidden>
+   <dl class="readouts" id="quality-counts"></dl>
+   <section class="measure-period" aria-labelledby="measure-period-title">
+    <div class="card-head"><div><p class="eyebrow">PERIOD ANALYSIS · KST</p><h3 id="measure-period-title">측정기간 분석</h3></div><button type="button" class="action" id="measure-all">전체 기간</button></div>
+    <div class="work-controls"><label>시작일 <input id="measure-from" type="date"></label><label>종료일 <input id="measure-to" type="date"></label><label>계측 항목 <select id="measure-field"></select></label></div>
+    <p class="subtext" id="measure-period-note" role="status"></p>
+    <div class="period-panels" id="measure-period-panels">
+     <section class="period-panel"><h4>일별 측정값 추이</h4><div class="chart" id="measure-period-chart"></div><div class="legend"><span class="mean-key">일별 평균</span><span class="interval-key">최솟값–최댓값</span></div></section>
+     <section class="period-panel"><h4>시간대별 측정값 분포</h4><div class="chart" id="measure-profile-chart"></div><div class="legend"><span class="iqr-key">상자: 25–75백분위</span><span class="teal">중앙값</span><span class="mean-key">평균</span><small>수염: 최솟값–최댓값</small></div></section>
+    </div>
+    <p class="subtext">유효 표본 기준의 산술평균입니다. 계측값을 시간가중하거나 에너지 사용량으로 환산하지 않습니다. 시간대별 상자는 여러 날짜의 같은 시각대 표본을 모아 계산합니다.</p>
+   </section>
+   <h3>선택일 분석결과</h3>
+   <div class="work-controls"><label>분석 날짜 <input id="measure-day" type="date"></label></div>
+   <p class="subtext" id="measure-day-label"></p><dl class="readouts" id="measure-stats"></dl>
+   <div class="chart" id="measure-chart"></div><p class="subtext" id="measure-chart-note"></p>
+   <div class="table-scroll"><table><caption>선택일 계측값</caption><thead><tr><th scope="col">시각(KST)</th><th scope="col" id="sample-unit">계측값</th><th scope="col">상태</th></tr></thead><tbody id="sample-rows"></tbody></table></div>
+   <div class="gallery-controls"><button id="sample-prev" class="action">이전</button><span id="sample-page" class="subtext" aria-live="polite"></span><button id="sample-next" class="action">다음</button></div>
+   <div class="table-scroll" id="measure-quality"></div>
+   <p class="subtext">품질표는 가져온 전체 자료 기준입니다. 중복 시각은 CSV에 먼저 나온 행만 남기며, 결측·규칙 위반값은 표시에서 제외하고 0으로 채우지 않습니다.</p>
+  </div>
+ </section>
+</section>
+<section id="mv" class="page" hidden>
+ <div class="hero"><div><p class="eyebrow">MEASUREMENT &amp; VERIFICATION</p><h1>효율측정(M&amp;V)</h1><p>대상별 측정경계와 기준선을 확인하고, 절감효과를 구분합니다.</p></div><span class="pill">방법론 · 예시 비교</span></div>
+ <div class="notice">모의운전 사례입니다. 현장 CSV와 자동 연결하지 않으며 EERS 인정 실적을 산정하지 않습니다.</div>
+ <section class="card workbench"><div class="card-head"><div><p class="eyebrow">ASSESSMENT BOUNDARY</p><h2>평가 대상별 비교</h2></div></div>
+ <div class="switch work-switch" aria-label="M&V 평가 대상"><button data-mv="hp">HP 단독</button><button data-mv="tes">HP–축열</button><button data-mv="pv">PV 단독</button><button data-mv="all">복합운전</button></div>
+ <div id="mv-result" aria-live="polite"></div></section>
+ <section class="card workbench">
+  <div class="card-head"><div><p class="eyebrow">PERIOD COMPARISON</p><h2>측정기간별 효과 비교</h2></div><span class="pill">예시 7일 · 실측 아님</span></div>
+  <div class="work-controls"><label>시작일 <input type="date" id="mv-start" min="2026-01-12" max="2026-01-18" value="2026-01-12"></label><label>종료일 <input type="date" id="mv-end" min="2026-01-12" max="2026-01-18" value="2026-01-18"></label></div>
+  <p class="subtext" id="mv-period-note"></p>
+  <div class="analysis-grid">
+   <div><h3>일별 변화</h3><div class="chart" id="mv-trend"></div><div class="legend" id="mv-legend"></div></div>
+   <div><h3 id="mv-bars-heading">기간 요약</h3><div id="mv-bars"></div></div>
+  </div>
+ </section>
+ <div class="roadmap workbench"><article class="card"><h2>검증 전 확인</h2><p>측정경계와 기준기간을 먼저 합의하고, 외기·열수요·운전조건 차이를 보정합니다. 기준자료가 없다면 추정과 실측 검증을 구분합니다.</p></article><article class="card"><h2>EERS 해석</h2><p>설비 에너지 절감, PV의 계통구매전력 대체, 피크 및 요금효과를 별도로 보고합니다. 같은 전력량을 두 사업의 성과로 합산하지 않습니다.</p></article></div>
+</section>
+<section id="flex" class="page" hidden>
+ <div class="hero"><div><p class="eyebrow">FLEXIBILITY USE CASES</p><h1>수요유연화(DR/VPP)</h1><p>잉여전력 시간대의 수요 증가와 피크 시간대의 수요 감축을 구분합니다.</p></div><span class="pill">DR 사례 · VPP 절차</span></div>
+ <div class="notice">아래 응동 비교는 단일 가상 개소 사례입니다. 실제 설비 지령이나 시장 정산으로 이어지지 않습니다.</div>
+ <section class="card workbench"><div class="card-head"><div><p class="eyebrow">DR EVENT REVIEW</p><h2>모의 DR 응동 비교</h2></div></div>
+  <div class="work-controls"><label>운전 목적 <select id="dr-direction"><option value="down">피크 수전 감축</option><option value="up">주간 HP 수요 증가</option></select></label><label>평가 시작 <select id="dr-start"></select></label><label>평가 시간 <select id="dr-duration"></select></label></div>
+  <p class="subtext" id="dr-boundary"></p><dl class="readouts" id="dr-result" aria-live="polite"></dl><p class="subtext">평가창은 기존 모의운전의 비교 구간만 바꿉니다. 계산값은 실측 응동, 보장 가용량 또는 신규 제어 스케줄이 아닙니다.</p>
+ </section>
+ <section class="card workbench">
+  <div class="card-head"><div><p class="eyebrow">TARIFF &amp; CONTROL</p><h2>시간대별 요금과 제어신호</h2></div><span class="pill">가정 요금 · 모의 신호</span></div>
+  <div class="work-controls"><label>저가 유도 기준 (원/kWh)<input id="tariff-low" type="number" min="0" max="500" step="1" value="118"></label><label>고가 감축 기준 (원/kWh)<input id="tariff-high" type="number" min="0" max="500" step="1" value="236"></label></div>
+  <p class="subtext" id="tariff-note" role="status"></p>
+  <div class="analysis-grid"><div><h3>가정 전력량 단가 (원/kWh)</h3><div class="chart" id="tariff-chart"></div><div class="legend"><span class="green">저가 시간대</span><span class="blue">중간 요금</span><span class="orange">고가 시간대</span></div></div><div><h3>요금 기반 제어 권고</h3><div class="chart" id="signal-chart"></div><div class="legend"><span class="green">+1 수요 증가 유도</span><span class="orange">−1 수요 감축 유도</span><small>0 유지</small></div></div></div>
+  <h3>모의 응동: 제어 요청 전·후 비교</h3><div class="chart wide-chart" id="response-chart"></div><div class="legend"><span class="dash">기준 운전</span><span class="blue">선택 모의운전</span><small>음영: 선택 평가구간</small></div>
+  <p class="subtext">요금 기준을 바꾸면 권고 신호만 변경됩니다. 아래 모의 응동은 별도의 고정 운전 시나리오이며 요금 기준으로 재최적화하지 않습니다.</p>
+ </section>
+ <section class="card workbench"><div class="card-head"><div><p class="eyebrow">VPP ARCHITECTURE</p><h2>VPP 연계 구성도</h2></div><span class="pill">개념도 · 실연계 없음</span></div>
+ <div class="vpp-map" role="group" aria-label="시장 신호와 현장 가용량·계측값의 양방향 흐름">
+  <div class="vpp-end"><b>계통·시장 운영자</b><span>요금 · DR 요청 / 응동 확인</span></div>
+  <div class="vpp-connect"><span>↓ 요청·가격</span><span>↑ 이행 보고</span></div>
+  <div class="vpp-hub"><b>VPP 집합자</b><span>가용량·지속시간 집계 · 지령 배분 · 결과 검증</span></div>
+  <div class="vpp-connect"><span>↓ 개소별 운전지령</span><span>↑ 가용량·계측값</span></div>
+  <div class="vpp-sites"><div><b>개소 A · 현장 EMS</b><span>HP–축열조</span></div><div><b>개소 B · 현장 EMS</b><span>PV–ESS</span></div><div><b>개소 C · 현장 EMS</b><span>PV·ESS·HP–축열조</span></div></div>
+ </div><p class="subtext">가용량은 같은 시간대·방향·지속시간 조건에서만 합산합니다. 열수요 충족·저장 상태·복귀 부하 조건을 확인한 뒤 지령을 배분합니다.</p></section>
+ <div class="roadmap workbench"><article class="card"><h2>DR · 현장 응동</h2><ol><li>증가·감축 방향과 기준부하 정의</li><li>열공급, ESS·축열 상태와 복귀 제약 확인</li><li>운전계획 적용 후 기준 대비 응동 확인</li></ol></article><article class="card"><h2>VPP · 다개소 집계 준비</h2><ol><li>개소별 증감 가능량(kW)과 지속시간 제출</li><li>같은 시간대·방향 기준으로 가용량 집계</li><li>지령 배분 및 이행량 확인 · 다개소 계산은 후속 단계</li></ol></article></div>
+</section>
+</main>
+<footer class="wrap">P2H FLEX LAB <span>현장측정 · 효율측정 · 수요유연화 · 측정데이터 처리</span></footer>
+</body>
+</html>

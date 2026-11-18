@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 420" role="img" aria-label="P2X 에너지 계측점">
+<title>P2X 에너지 계측점</title>
+<defs><marker id="arr" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0L10 5L0 10z" fill="#4174a3"/></marker></defs>
+<rect width="900" height="420" rx="18" fill="#f1f7fe"/>
+<g font-family="system-ui,sans-serif" text-anchor="middle" fill="#153559">
+<text x="450" y="55" font-size="29" font-weight="800">P2X 에너지 계측점</text>
+<text x="450" y="84" font-size="17" fill="#47657e">공개용 개념도  ·  실제 결선도 또는 설치 명세가 아님</text>
+<path d="M336 161H417" fill="none" stroke="#4174a3" stroke-width="3" marker-end="url(#arr)"/>
+<path d="M564 161H483" fill="none" stroke="#4174a3" stroke-width="3" marker-end="url(#arr)"/>
+<path d="M450 194V243" fill="none" stroke="#4174a3" stroke-width="3" marker-end="url(#arr)"/>
+<path d="M657 277H568" fill="none" stroke="#4174a3" stroke-width="3" marker-end="url(#arr)"/>
+<path d="M450 309V338" fill="none" stroke="#4174a3" stroke-width="3" marker-end="url(#arr)"/>
+<rect x="86" y="128" width="250" height="66" rx="11" fill="#e3f1ff" stroke="#9abbd8" stroke-width="2"/>
+<text x="211" y="156" font-size="21" font-weight="750">전력계통</text>
+<text x="211" y="179" font-size="15" fill="#47657e">수전 및 역송 전력</text>
+<rect x="420" y="128" width="60" height="66" rx="11" fill="#fff" stroke="#9abbd8" stroke-width="2"/>
+<text x="450" y="156" font-size="21" font-weight="750">모선</text>
+<text x="450" y="179" font-size="15" fill="#47657e">전기</text>
+<rect x="564" y="128" width="250" height="66" rx="11" fill="#e1f4eb" stroke="#9abbd8" stroke-width="2"/>
+<text x="689" y="156" font-size="21" font-weight="750">태양광 · ESS</text>
+<text x="689" y="179" font-size="15" fill="#47657e">발전 및 충·방전 전력</text>
+<rect x="332" y="243" width="236" height="66" rx="11" fill="#fff1d7" stroke="#9abbd8" stroke-width="2"/>
+<text x="450" y="271" font-size="21" font-weight="750">히트펌프</text>
+<text x="450" y="294" font-size="15" fill="#47657e">소비전력 및 열출력</text>
+<rect x="657" y="243" width="160" height="66" rx="11" fill="#fff" stroke="#9abbd8" stroke-width="2"/>
+<text x="737" y="271" font-size="21" font-weight="750">온도 · 유량</text>
+<text x="737" y="294" font-size="15" fill="#47657e">열량 계산 입력</text>
+<rect x="332" y="338" width="236" height="66" rx="11" fill="#fff1d7" stroke="#9abbd8" stroke-width="2"/>
+<text x="450" y="366" font-size="21" font-weight="750">축열조 · 열부하</text>
+<text x="450" y="389" font-size="15" fill="#47657e">저장열량 및 유효 열공급</text>
+</g>
+</svg>

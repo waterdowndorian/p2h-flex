@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 420" role="img" aria-label="P2X 제어 연계">
+<title>P2X 제어 연계</title>
+<defs><marker id="arr" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0L10 5L0 10z" fill="#4174a3"/></marker></defs>
+<rect width="900" height="420" rx="18" fill="#f1f7fe"/>
+<g font-family="system-ui,sans-serif" text-anchor="middle" fill="#153559">
+<text x="450" y="55" font-size="29" font-weight="800">P2X 제어 연계</text>
+<text x="450" y="84" font-size="17" fill="#47657e">공개용 개념도  ·  실제 운영·통신 구성과 무관</text>
+<path d="M450 178V222" fill="none" stroke="#4174a3" stroke-width="3" marker-end="url(#arr)"/>
+<path d="M450 288V312H242V331" fill="none" stroke="#4174a3" stroke-width="3" marker-end="url(#arr)"/>
+<path d="M450 312H658V331" fill="none" stroke="#4174a3" stroke-width="3" marker-end="url(#arr)"/>
+<rect x="320" y="112" width="260" height="66" rx="11" fill="#fff" stroke="#9abbd8" stroke-width="2"/>
+<text x="450" y="140" font-size="21" font-weight="750">요금 · 수요반응 신호</text>
+<text x="450" y="163" font-size="15" fill="#47657e">외부 신호 · 모의 입력</text>
+<rect x="320" y="222" width="260" height="66" rx="11" fill="#d9edff" stroke="#9abbd8" stroke-width="2"/>
+<text x="450" y="250" font-size="21" font-weight="750">현장 에너지관리시스템</text>
+<text x="450" y="273" font-size="15" fill="#47657e">운전 계획 및 응동 검토</text>
+<rect x="122" y="331" width="240" height="66" rx="11" fill="#e1f4eb" stroke="#9abbd8" stroke-width="2"/>
+<text x="242" y="359" font-size="21" font-weight="750">PV · ESS</text>
+<text x="242" y="382" font-size="15" fill="#47657e">발전 · 충전 · 방전</text>
+<rect x="538" y="331" width="240" height="66" rx="11" fill="#fff1d7" stroke="#9abbd8" stroke-width="2"/>
+<text x="658" y="359" font-size="21" font-weight="750">히트펌프 · 축열조</text>
+<text x="658" y="382" font-size="15" fill="#47657e">열 생산 · 저장 · 공급</text>
+</g>
+</svg>
